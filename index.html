@@ -1,222 +1,269 @@
-<style>
-:root {
-  --primary: #5da9ff;
-  --bg-dark: #0f172a;
-  --bg-glass: rgba(255, 255, 255, 0.08);
-  --text-light: #f1f5f9;
-  --text-muted: #94a3b8;
-  --radius-pill: 50px;
-  --shadow-soft: 0 8px 30px rgba(0, 0, 0, 0.3);
-  --transition: all 0.3s ease-in-out;
+<style>:root {
+  --primary: #4f98ff;
+  --bg: #0a1128;
+  --glass: rgba(255,255,255,0.08);
+  --text: #e1eaff;
+  --text-light: #a0aec0;
+  --radius: 18px;
+  --shadow: 0 6px 24px rgba(0,0,0,0.4);
+  --transition: all 0.3s ease;
 }
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
-
 body {
-  background: var(--bg-dark);
-  color: var(--text-light);
-  overflow-x: hidden;
+  background: var(--bg);
+  color: var(--text);
+  scroll-behavior: smooth;
 }
-
 section {
-  padding: 120px 8%;
-  min-height: 100vh;
+  padding: 100px 6%;
 }
-
-h1, h2, h3 {
+h1,h2,h3 {
   font-weight: 600;
 }
 
+/* Scroll Reveal */
 .reveal {
   opacity: 0;
-  transform: translateY(40px);
+  transform: translateY(30px);
   transition: 0.8s ease;
 }
-
 .reveal.active {
   opacity: 1;
   transform: translateY(0);
 }
 .navbar {
   position: fixed;
-  top: 25px;
+  top: 18px;
   left: 50%;
   transform: translateX(-50%);
-  width: 85%;
-  padding: 15px 30px;
-  border-radius: var(--radius-pill);
-  background: var(--bg-glass);
+  width: 90%;
+  padding: 16px 28px;
+  background: var(--glass);
   backdrop-filter: blur(12px);
-  box-shadow: var(--shadow-soft);
+  border-radius: var(--radius);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 1000;
-  transition: var(--transition);
+  box-shadow: var(--shadow);
+  z-index: 100;
 }
-
-.nav-left {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
 .nav-left img {
-  width: 45px;
-  height: 45px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
   object-fit: cover;
 }
-
 .nav-menu {
-  display: flex;
-  gap: 25px;
   list-style: none;
+  display: flex;
+  gap: 24px;
 }
-
-.nav-menu li {
-  position: relative;
-}
-
-.nav-menu a {
+.nav-menu li a {
   text-decoration: none;
-  color: var(--text-light);
   font-size: 14px;
+  color: var(--text);
   transition: var(--transition);
 }
-
-.nav-menu a:hover {
+.nav-menu li a:hover {
   color: var(--primary);
 }
-.hero {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+#hero {
   text-align: center;
+  padding: 160px 6%;
 }
-
-.hero h1 {
-  font-size: 3rem;
-  margin-bottom: 20px;
+#hero h1 {
+  font-size: 2.8rem;
+  color: var(--primary);
 }
-
-.hero p {
+#hero p {
+  color: var(--text-light);
+  margin-top: 18px;
   max-width: 600px;
-  margin: auto;
-  color: var(--text-muted);
-  line-height: 1.7;
+  margin: 18px auto 0;
 }
-.glass-card {
-  background: var(--bg-glass);
-  backdrop-filter: blur(12px);
-  padding: 30px;
-  border-radius: 20px;
-  box-shadow: var(--shadow-soft);
-  transition: var(--transition);
+#education .card,
+#projects .card,
+#skills .skills-container,
+#certifications .cert-grid {
+  display: grid;
+  gap: 20px;
+}
+#education .card,
+#projects .card {
+  grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+}
+.card {
+  background: var(--glass);
+  backdrop-filter: blur(14px);
+  padding: 22px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
   cursor: pointer;
+  transition: var(--transition);
 }
+.card:hover {
+  transform: translateY(-10px);
+}
+@media (max-width: 768px) {
+  .nav-menu {
+    display: none;
+  }
+  .navbar {
+    justify-content: space-between;
+  }
+}
+@media (max-width: 480px) {
+  #hero h1 {
+    font-size: 2rem;
+  }
+}
+</style>
+<script>
+const menu = document.querySelector(".nav-menu");
 
-.glass-card:hover {
-  transform: translateY(-8px);
-}</style>
+window.addEventListener("scroll", () => {
+  document.querySelector(".navbar").classList.toggle("shadow", window.scrollY > 30);
+});
+function openModal(html) {
+  const modal = document.createElement("div");
+  modal.className = "modal";
+  modal.innerHTML = `
+    <div class="modal-content">
+      ${html}
+      <span class="close-btn" onclick="closeModal()">×</span>
+    </div>`;
+  document.body.appendChild(modal);
+}
+function closeModal() {
+  document.querySelector(".modal").remove();
+}
+</script>
+<style>.modal {
+  position: fixed;
+  inset:0;
+  background: rgba(0,0,0,0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+.modal-content {
+  background: var(--bg);
+  padding: 28px;
+  border-radius: var(--radius);
+  max-width: 480px;
+  width: 90%;
+  box-shadow: var(--shadow);
+  position: relative;
+}
+.close-btn {
+  position:absolute;
+  top: 12px; right: 16px;
+  font-size: 22px;
+  cursor: pointer;
+  color: var(--primary);
+}</style><script>const reveals = document.querySelectorAll(".reveal");
+window.addEventListener("scroll", () => {
+  reveals.forEach(el => {
+    const top = el.getBoundingClientRect().top;
+    if (top < window.innerHeight - 80) {
+      el.classList.add("active");
+    }
+  });
+});
+import "./navbar.js";
+import "./modal.js";
+import "./scroll.js";
+</script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Arjun | Modern Resume</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, inital-scale=1.0">
+  <title>Interactive Resume — Arjun</title>
 
-  <!-- CSS -->
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/hero.css">
   <link rel="stylesheet" href="css/sections.css">
   <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
 </head>
-
 <body>
 
-<!-- Floating Navbar -->
+<!-- Navbar -->
 <header class="navbar">
   <div class="nav-left">
     <img src="assets/profile.jpg" alt="Profile">
-    <div>
-      <strong>Arjun K</strong><br>
-      <small>Engineering Professional</small>
-    </div>
+    <strong>Arjun K</strong>
   </div>
-
   <ul class="nav-menu">
     <li><a href="#hero">About</a></li>
     <li><a href="#education">Education</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#skills">Skills</a></li>
+    <li><a href="#certifications">Certificates</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </header>
 
-<!-- Hero Section -->
-<section id="hero" class="hero reveal">
-  <h1>Designing Systems With Precision & Vision</h1>
-  <p>
-    Passionate engineering professional focused on quality inspection,
-    system validation, and advanced technology integration.
-  </p>
+<!-- Hero -->
+<section id="hero" class="reveal">
+  <h1>Hello, I’m Arjun</h1>
+  <p>Engineering Professional focused on quality inspection, advanced system validation, and smart solutions.</p>
 </section>
 
-<!-- Education Section -->
+<!-- Education -->
 <section id="education" class="reveal">
   <h2>Education</h2>
-  <div class="glass-card">
+  <div class="card" onclick="openModal('<h3>B.E. ECE</h3><p>College XYZ | 2023</p>')">
     <h3>Bachelor of Engineering</h3>
-    <p>Electronics & Communication Engineering</p>
+    <p>Electronics & Communication</p>
   </div>
 </section>
 
-<!-- Projects Section -->
+<!-- Projects -->
 <section id="projects" class="reveal">
   <h2>Projects</h2>
-  <div class="glass-card">
-    <h3>Missile Simulation Quality System</h3>
-    <p>Advanced testing & traceability system</p>
+  <div class="card" onclick="openModal('<h3>Test System Alpha</h3><p>Tools: JS, Python</p><p>Framework integration & feedback loop design</p>')">
+    <h3>Test System Alpha</h3>
+    <p>Automated test flow platform</p>
   </div>
 </section>
 
-<!-- Skills Section -->
+<!-- Skills -->
 <section id="skills" class="reveal">
   <h2>Technical Skills</h2>
-  <div class="glass-card">
-    <h3>System Testing & QA</h3>
-    <p>Missile pitch & course validation, documentation</p>
+  <div class="card">
+    <h3>Testing & QA</h3><p>Advanced verification & validation</p>
+  </div>
+</section>
+
+<!-- Certificates -->
+<section id="certifications" class="reveal">
+  <h2>Certifications</h2>
+  <div class="card" onclick="openModal('<img src=assets/cert1.jpg width=100%><p>Certified X</p>')">
+    <p>Certified X — XYZ</p>
+  </div>
+  <div class="card" onclick="openModal('<img src=assets/cert2.jpg width=100%><p>Certified Y</p>')">
+    <p>Certified Y — ABC</p>
   </div>
 </section>
 
 <!-- Contact -->
 <section id="contact" class="reveal">
   <h2>Contact</h2>
-  <p>Email: arjun@email.com</p>
+  <p>Email: example@domain.com</p>
+  <p>LinkedIn: linkedin.com/in/arjun</p>
   <p>GitHub: github.com/arjun</p>
 </section>
 
-<script src="js/main.js"></script>
+<script type="module" src="js/main.js"></script>
 </body>
 </html>
-<script>
-// Reveal sections on scroll
-const reveals = document.querySelectorAll(".reveal");
-
-window.addEventListener("scroll", () => {
-  reveals.forEach((el) => {
-    const windowHeight = window.innerHeight;
-    const revealTop = el.getBoundingClientRect().top;
-    const revealPoint = 150;
-
-    if (revealTop < windowHeight - revealPoint) {
-      el.classList.add("active");
-    }
-  });
-});</scrit>
