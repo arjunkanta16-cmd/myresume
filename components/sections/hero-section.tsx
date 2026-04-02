@@ -17,7 +17,7 @@ export function HeroSection() {
         <div className="ambient-blob ambient-blob-blue left-[-8rem] top-14 h-72 w-72" />
         <div className="ambient-blob ambient-blob-warm right-[-5rem] top-24 h-60 w-60 [animation-delay:-4s]" />
       </div>
-      <div className="mx-auto grid max-w-7xl gap-16 px-4 pb-24 pt-6 sm:px-6 lg:grid-cols-[1.06fr_0.94fr] lg:px-8 lg:pb-28 lg:pt-10">
+      <div className="mx-auto grid max-w-7xl gap-14 px-4 pb-24 pt-10 sm:px-6 lg:grid-cols-[1.02fr_0.98fr] lg:px-8 lg:pb-28 lg:pt-12">
         <motion.div className="relative">
           <motion.div variants={fadeUpItem} className="section-label">
             Thoughtful systems. Calm execution. Real-world impact.
@@ -32,7 +32,7 @@ export function HeroSection() {
 
           <motion.h1
             variants={fadeUpItem}
-            className="mt-5 max-w-4xl font-display text-[clamp(3.2rem,7vw,5.6rem)] font-semibold leading-[0.92] tracking-[-0.05em] text-text"
+            className="mt-5 max-w-[52rem] font-display text-[clamp(2.9rem,5.6vw,4.9rem)] font-semibold leading-[0.95] tracking-[-0.05em] text-text"
           >
             I build
             {" "}
@@ -45,7 +45,7 @@ export function HeroSection() {
 
           <motion.p
             variants={fadeUpItem}
-            className="mt-7 max-w-3xl text-lg leading-9 text-muted sm:text-[1.18rem]"
+            className="mt-6 max-w-3xl text-[1.02rem] leading-8 text-muted sm:text-[1.1rem] sm:leading-8"
           >
             <span className="highlight-word">{portfolio.fullName}</span>
             {" "}
@@ -54,12 +54,12 @@ export function HeroSection() {
 
           <motion.p
             variants={fadeUpItem}
-            className="text-gradient mt-7 max-w-3xl font-display text-[clamp(1.5rem,2.6vw,2.45rem)] font-semibold leading-[1.04]"
+            className="text-gradient mt-6 max-w-3xl font-display text-[clamp(1.35rem,2.2vw,2rem)] font-semibold leading-[1.08]"
           >
             {portfolio.tagline}
           </motion.p>
 
-          <motion.div variants={staggerContainer} className="mt-8 max-w-3xl space-y-4 text-base leading-8 text-muted sm:text-lg">
+          <motion.div variants={staggerContainer} className="mt-8 max-w-3xl space-y-4 text-base leading-8 text-muted sm:text-[1.02rem]">
             <motion.p variants={fadeUpItem}>{portfolio.shortIntro}</motion.p>
             <motion.p variants={fadeUpItem}>{portfolio.heroBlurb}</motion.p>
           </motion.div>
@@ -91,7 +91,7 @@ export function HeroSection() {
           </motion.div>
         </motion.div>
 
-        <motion.div className="relative hero-float">
+        <motion.div className="relative hero-float lg:pt-4">
           <div className="hero-orb absolute -left-8 top-12 h-40 w-40 rounded-full bg-accent/10 blur-3xl" />
           <div className="hero-orb-delay absolute -right-6 bottom-8 h-44 w-44 rounded-full bg-[#f5d7aa]/50 blur-3xl" />
 

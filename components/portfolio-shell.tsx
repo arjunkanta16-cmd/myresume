@@ -35,7 +35,7 @@ export function PortfolioShell() {
       <DarkModeScene />
       <div className="relative z-10">
         <NavBar onAdminOpen={() => setIsAdminOpen(true)} />
-        <main className="pt-24 sm:pt-28">
+        <main className="pt-32 sm:pt-36">
           <HeroSection />
           <AboutSection />
           <SkillsSection />

@@ -30,7 +30,7 @@ export function NavBar({ onAdminOpen }: NavBarProps) {
   const [activeHref, setActiveHref] = useState("#about");
   const brandShort = useMemo(() => {
     const parts = portfolio.fullName.split(/\s+/).filter(Boolean);
-    return parts.slice(0, 2).join(" ");
+    return parts.slice(0, 3).join(" ");
   }, [portfolio.fullName]);
   const initials = useMemo(
     () =>
@@ -76,22 +76,22 @@ export function NavBar({ onAdminOpen }: NavBarProps) {
           : "border-border/50 bg-surface/78 backdrop-blur-xl"
       )}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
-        <Link href="/" className="min-w-0 flex items-center gap-3" title={portfolio.fullName}>
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3.5 sm:px-6 lg:px-8">
+        <Link href="/" className="flex min-w-0 shrink-0 items-center gap-3 xl:w-[18rem]" title={portfolio.fullName}>
           <div className="soft-ring flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-border/80 bg-surface/90">
             <span className="font-display text-lg font-semibold uppercase tracking-[0.14em] text-text">{initials}</span>
           </div>
-          <div className="min-w-0">
-            <p className="font-display text-sm font-semibold uppercase tracking-[0.08em] text-text sm:text-base 2xl:text-lg">
+          <div className="min-w-0 leading-none">
+            <p className="truncate whitespace-nowrap font-display text-[0.98rem] font-semibold uppercase tracking-[0.05em] text-text sm:text-[1.02rem] 2xl:text-[1.08rem]">
               <span className="2xl:hidden">{brandShort}</span>
               <span className="hidden 2xl:inline">{portfolio.name}</span>
             </p>
-            <p className="text-[0.68rem] uppercase tracking-[0.34em] text-muted sm:text-[0.72rem]">Systems Portfolio</p>
+            <p className="mt-2 text-[0.68rem] uppercase tracking-[0.3em] text-muted sm:text-[0.72rem]">Systems Portfolio</p>
           </div>
         </Link>
 
-        <div className="hidden xl:flex xl:flex-1 xl:justify-center">
-          <div className="nav-capsule soft-ring relative flex items-center gap-2 px-2 py-2">
+        <div className="hidden xl:flex xl:min-w-0 xl:flex-1 xl:justify-center">
+          <div className="nav-capsule soft-ring relative flex max-w-[47rem] items-center gap-2 px-2 py-2">
             <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
             <nav className="flex items-center gap-1">
               {navItems.map((item) => {
@@ -103,7 +103,7 @@ export function NavBar({ onAdminOpen }: NavBarProps) {
                     href={item.href}
                     onClick={() => setActiveHref(item.href)}
                     className={cn(
-                      "relative inline-flex items-center rounded-full px-4 py-2.5 text-sm font-medium transition duration-300",
+                      "relative inline-flex items-center rounded-full px-3.5 py-2.5 text-sm font-medium transition duration-300",
                       isActive ? "text-text" : "text-muted hover:bg-accent/5 hover:text-text"
                     )}
                   >
@@ -120,7 +120,7 @@ export function NavBar({ onAdminOpen }: NavBarProps) {
           </div>
         </div>
 
-        <div className="hidden items-center gap-3 xl:flex">
+        <div className="hidden shrink-0 items-center gap-2.5 xl:flex">
           <ThemeToggle />
           <button
             type="button"
