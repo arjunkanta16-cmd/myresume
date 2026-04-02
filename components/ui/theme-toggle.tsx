@@ -13,7 +13,7 @@ type ThemeToggleProps = {
 export function ThemeToggle({ className, compact = false }: ThemeToggleProps) {
   const { theme, toggleTheme } = useThemeMode();
   const isDark = theme === "dark";
-  const currentLabel = isDark ? "Dark Mode" : "Light Mode";
+  const currentLabel = isDark ? "Dark" : "Light";
   const nextLabel = isDark ? "Light" : "Dark";
 
   return (
@@ -30,11 +30,11 @@ export function ThemeToggle({ className, compact = false }: ThemeToggleProps) {
     >
       <span className="inline-flex items-center gap-2 px-2.5">
         {isDark ? <MoonStar className="h-4 w-4" /> : <SunMedium className="h-4 w-4" />}
-        <span>{compact ? currentLabel.replace(" Mode", "") : currentLabel}</span>
+        <span>{currentLabel}</span>
       </span>
       <span className="theme-toggle-thumb">
         {isDark ? <SunMedium className="h-4 w-4" /> : <MoonStar className="h-4 w-4" />}
-        {compact ? <span className="sr-only">{nextLabel}</span> : null}
+        <span className="sr-only">{nextLabel}</span>
       </span>
     </button>
   );

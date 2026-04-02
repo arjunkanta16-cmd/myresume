@@ -9,7 +9,7 @@ import { usePortfolio } from "@/components/providers/portfolio-provider";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import { ResumeDownloadButton } from "@/components/ui/resume-download-button";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { fadeUpItem, staggerContainer, softScaleIn } from "@/lib/motion";
+import { fadeUpItem, softScaleIn } from "@/lib/motion";
 
 export function ContactSection() {
   const { portfolio } = usePortfolio();
@@ -23,9 +23,23 @@ export function ContactSection() {
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
+    const formData = new FormData(form);
+    const name = String(formData.get("name") ?? "").trim();
+    const email = String(formData.get("email") ?? "").trim();
+    const subject = String(formData.get("subject") ?? "").trim();
+    const message = String(formData.get("message") ?? "").trim();
 
     startTransition(() => {
-      setStatus("Demo form submitted. The UI is ready to connect to email or CRM automation.");
+      const lines = [
+        name ? `Name: ${name}` : "",
+        email ? `Email: ${email}` : "",
+        "",
+        message
+      ].filter(Boolean);
+
+      const mailto = `mailto:${portfolio.contact.emails[0]}?subject=${encodeURIComponent(subject || "Portfolio enquiry")}&body=${encodeURIComponent(lines.join("\n"))}`;
+      setStatus("Opening your email app with the message pre-filled.");
+      window.location.href = mailto;
       form.reset();
     });
   }
@@ -38,7 +52,7 @@ export function ContactSection() {
             eyebrow="Contact"
             title={
               <>
-                Let’s build
+                Let&apos;s build
                 {" "}
                 <span className="text-gradient">dependable digital systems</span>
               </>
@@ -131,7 +145,7 @@ export function ContactSection() {
               <h3 className="mt-3 font-display text-3xl font-semibold text-text">Start a conversation</h3>
             </div>
             <span className="rounded-full border border-accent/15 bg-accent-soft px-3 py-1 text-xs text-accent">
-              Frontend-ready
+              Direct email
             </span>
           </div>
 
@@ -169,7 +183,7 @@ export function ContactSection() {
               disabled={isPending}
               className="soft-ring w-full rounded-full bg-text px-5 py-3.5 text-sm font-semibold text-bg transition duration-300 hover:scale-[1.01]"
             >
-              {isPending ? "Sending..." : "Send Message"}
+              {isPending ? "Opening Email..." : "Send Message"}
             </button>
             {status ? <p className="text-sm text-accent">{status}</p> : null}
           </form>

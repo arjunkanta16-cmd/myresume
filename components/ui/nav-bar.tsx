@@ -28,6 +28,10 @@ export function NavBar({ onAdminOpen }: NavBarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeHref, setActiveHref] = useState("#about");
+  const brandShort = useMemo(() => {
+    const parts = portfolio.fullName.split(/\s+/).filter(Boolean);
+    return parts.slice(0, 2).join(" ");
+  }, [portfolio.fullName]);
   const initials = useMemo(
     () =>
       portfolio.fullName
@@ -73,13 +77,14 @@ export function NavBar({ onAdminOpen }: NavBarProps) {
       )}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
-        <Link href="/" className="min-w-0 flex items-center gap-3">
+        <Link href="/" className="min-w-0 flex items-center gap-3" title={portfolio.fullName}>
           <div className="soft-ring flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-border/80 bg-surface/90">
             <span className="font-display text-lg font-semibold uppercase tracking-[0.14em] text-text">{initials}</span>
           </div>
           <div className="min-w-0">
-            <p className="truncate font-display text-base font-semibold uppercase tracking-[0.08em] text-text sm:text-lg">
-              {portfolio.name}
+            <p className="font-display text-sm font-semibold uppercase tracking-[0.08em] text-text sm:text-base 2xl:text-lg">
+              <span className="2xl:hidden">{brandShort}</span>
+              <span className="hidden 2xl:inline">{portfolio.name}</span>
             </p>
             <p className="text-[0.68rem] uppercase tracking-[0.34em] text-muted sm:text-[0.72rem]">Systems Portfolio</p>
           </div>
