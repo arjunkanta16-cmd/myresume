@@ -1,0 +1,8 @@
+.next
+node_modules
+*.log
+npm-debug.log*
+dist
+out
+.tmp_resume
+playwright-*.png
