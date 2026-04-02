@@ -9,18 +9,22 @@ import { cn } from "@/lib/utils";
 type ResumeDownloadButtonProps = {
   className?: string;
   variant?: "primary" | "secondary";
+  showStatus?: boolean;
 };
 
 export function ResumeDownloadButton({
   className,
-  variant = "primary"
+  variant = "primary",
+  showStatus = false
 }: ResumeDownloadButtonProps) {
   const { portfolio } = usePortfolio();
   const [isLoading, setIsLoading] = useState(false);
+  const [status, setStatus] = useState("");
 
   async function handleDownload() {
     try {
       setIsLoading(true);
+      setStatus("");
       const response = await fetch("/api/resume", {
         method: "POST",
         headers: {
@@ -41,33 +45,41 @@ export function ResumeDownloadButton({
       document.body.appendChild(anchor);
       anchor.click();
       anchor.remove();
+      setStatus("Resume downloaded successfully.");
       window.setTimeout(() => {
         window.URL.revokeObjectURL(url);
       }, 1000);
     } catch (error) {
       console.error(error);
-      window.alert("Resume generation failed. Please try again.");
+      setStatus("Resume generation failed. Please try again.");
     } finally {
       setIsLoading(false);
     }
   }
 
   return (
-    <button
-      type="button"
-      onClick={handleDownload}
-      disabled={isLoading}
-      className={cn(
-        "soft-ring inline-flex items-center justify-center gap-2 rounded-full px-5 py-3.5 text-sm font-semibold transition duration-300",
-        variant === "primary"
-          ? "bg-text text-bg shadow-glow hover:-translate-y-0.5 hover:scale-[1.02] hover:opacity-95"
-          : "border border-border/80 bg-surface/90 text-text backdrop-blur hover:-translate-y-0.5 hover:scale-[1.02] hover:border-accent/40 hover:shadow-card",
-        isLoading && "cursor-wait opacity-70",
-        className
-      )}
-    >
-      <Download className="h-4 w-4" />
-      {isLoading ? "Preparing Resume..." : "Download Resume"}
-    </button>
+    <div className={cn("inline-flex flex-col items-start gap-2", className)}>
+      <button
+        type="button"
+        onClick={handleDownload}
+        disabled={isLoading}
+        className={cn(
+          "soft-ring inline-flex items-center justify-center gap-2 rounded-full px-5 py-3.5 text-sm font-semibold transition duration-300",
+          variant === "primary"
+            ? "bg-text text-bg hover:-translate-y-0.5 hover:scale-[1.02] hover:opacity-95"
+            : "border border-border/80 bg-surface/90 text-text backdrop-blur hover:-translate-y-0.5 hover:scale-[1.02] hover:border-accent/40 hover:shadow-card",
+          isLoading && "cursor-wait opacity-70"
+        )}
+      >
+        <Download className="h-4 w-4" />
+        {isLoading ? "Preparing Resume..." : "Download Resume"}
+      </button>
+      <span
+        aria-live="polite"
+        className={cn(showStatus ? "min-h-[1rem] text-xs text-muted" : "sr-only")}
+      >
+        {showStatus ? status : null}
+      </span>
+    </div>
   );
 }

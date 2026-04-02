@@ -24,7 +24,7 @@ export function ExperienceSection() {
             key={`${item.role}-${item.company}`}
             variants={fadeUpItem}
             whileHover={{ y: -6 }}
-            className="premium-panel grid gap-6 p-6 sm:p-7 lg:grid-cols-[0.32fr_0.68fr]"
+            className="premium-panel soft-hover-card grid gap-6 p-6 sm:p-7 lg:grid-cols-[0.32fr_0.68fr]"
           >
             <div className="border-b border-border/60 pb-6 lg:border-b-0 lg:border-r lg:pb-0 lg:pr-6">
               <p className="text-[0.72rem] uppercase tracking-[0.32em] text-accent">{item.duration}</p>

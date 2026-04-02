@@ -12,6 +12,7 @@ type FooterProps = {
 
 export function Footer({ onAdminOpen }: FooterProps) {
   const { portfolio } = usePortfolio();
+  const year = new Date().getFullYear();
   const socialLinks = [
     portfolio.contact.github ? { href: portfolio.contact.github, label: "GitHub" } : null,
     portfolio.contact.linkedin ? { href: portfolio.contact.linkedin, label: "LinkedIn" } : null
@@ -25,6 +26,7 @@ export function Footer({ onAdminOpen }: FooterProps) {
           <p className="mt-2 leading-7">
             System-driven IT engineer focused on software, DevOps, and intelligent product building.
           </p>
+          <p className="mt-3 text-xs uppercase tracking-[0.22em] text-muted/80">© {year} All rights reserved.</p>
         </motion.div>
 
         <motion.div variants={fadeUpItem} className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-5">

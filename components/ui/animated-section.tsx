@@ -9,7 +9,7 @@ type AnimatedSectionProps = PropsWithChildren<{
 
 export function AnimatedSection({ children, className, id }: AnimatedSectionProps) {
   return (
-    <section id={id} className={className}>
+    <section id={id} className={["scroll-mt-32 sm:scroll-mt-36", className].filter(Boolean).join(" ")}>
       {children}
     </section>
   );
