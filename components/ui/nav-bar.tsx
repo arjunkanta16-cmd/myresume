@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Menu, ShieldEllipsis } from "lucide-react";
+import { Menu } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 
 import { usePortfolio } from "@/components/providers/portfolio-provider";
@@ -28,20 +28,10 @@ export function NavBar({ onAdminOpen }: NavBarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeHref, setActiveHref] = useState("#about");
-  const brandShort = useMemo(() => {
+  const mobileBrand = useMemo(() => {
     const parts = portfolio.fullName.split(/\s+/).filter(Boolean);
-    return parts.slice(0, 3).join(" ");
+    return parts.slice(0, 2).join(" ");
   }, [portfolio.fullName]);
-  const initials = useMemo(
-    () =>
-      portfolio.fullName
-        .split(/\s+/)
-        .filter(Boolean)
-        .map((part) => part[0])
-        .join("")
-        .slice(0, 2),
-    [portfolio.fullName]
-  );
 
   useEffect(() => {
     function handleScroll() {
@@ -76,64 +66,17 @@ export function NavBar({ onAdminOpen }: NavBarProps) {
           : "border-border/50 bg-surface/78 backdrop-blur-xl"
       )}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3.5 sm:px-6 lg:px-8">
-        <Link href="/" className="flex min-w-0 shrink-0 items-center gap-3 xl:w-[18rem]" title={portfolio.fullName}>
-          <div className="soft-ring flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-border/80 bg-surface/90">
-            <span className="font-display text-lg font-semibold uppercase tracking-[0.14em] text-text">{initials}</span>
-          </div>
+      <div className="mx-auto flex max-w-[88rem] items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8 xl:hidden">
+        <Link href="/" className="min-w-0 flex-1" title={portfolio.fullName}>
           <div className="min-w-0 leading-none">
-            <p className="truncate whitespace-nowrap font-display text-[0.98rem] font-semibold uppercase tracking-[0.05em] text-text sm:text-[1.02rem] 2xl:text-[1.08rem]">
-              <span className="2xl:hidden">{brandShort}</span>
-              <span className="hidden 2xl:inline">{portfolio.name}</span>
+            <p className="truncate whitespace-nowrap font-display text-[0.92rem] font-semibold uppercase tracking-[0.05em] text-text sm:text-[0.98rem]">
+              {mobileBrand}
             </p>
-            <p className="mt-2 text-[0.68rem] uppercase tracking-[0.3em] text-muted sm:text-[0.72rem]">Systems Portfolio</p>
+            <p className="mt-2 text-[0.62rem] uppercase tracking-[0.3em] text-muted sm:text-[0.66rem]">Systems Portfolio</p>
           </div>
         </Link>
 
-        <div className="hidden xl:flex xl:min-w-0 xl:flex-1 xl:justify-center">
-          <div className="nav-capsule soft-ring relative flex max-w-[47rem] items-center gap-2 px-2 py-2">
-            <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
-            <nav className="flex items-center gap-1">
-              {navItems.map((item) => {
-                const isActive = activeHref === item.href;
-
-                return (
-                  <a
-                    key={item.href}
-                    href={item.href}
-                    onClick={() => setActiveHref(item.href)}
-                    className={cn(
-                      "relative inline-flex items-center rounded-full px-3.5 py-2.5 text-sm font-medium transition duration-300",
-                      isActive ? "text-text" : "text-muted hover:bg-accent/5 hover:text-text"
-                    )}
-                  >
-                    {isActive ? (
-                      <span
-                        className="absolute inset-0 rounded-full bg-accent/10 shadow-[0_10px_24px_rgba(56,189,248,0.12)] ring-1 ring-accent/20"
-                      />
-                    ) : null}
-                    <span className="relative">{item.label}</span>
-                  </a>
-                );
-              })}
-            </nav>
-          </div>
-        </div>
-
-        <div className="hidden shrink-0 items-center gap-2.5 xl:flex">
-          <ThemeToggle />
-          <button
-            type="button"
-            onClick={onAdminOpen}
-            className="soft-ring inline-flex h-11 w-11 items-center justify-center rounded-full border border-border/80 bg-surface/90 text-text transition duration-300 hover:-translate-y-0.5 hover:border-accent/40"
-            aria-label="Open admin panel"
-          >
-            <ShieldEllipsis className="h-4 w-4" />
-          </button>
-          <ResumeDownloadButton />
-        </div>
-
-        <div className="flex items-center gap-2 xl:hidden">
+        <div className="flex shrink-0 items-center gap-2">
           <ThemeToggle compact />
           <button
             type="button"
@@ -143,6 +86,50 @@ export function NavBar({ onAdminOpen }: NavBarProps) {
           >
             <Menu className="h-5 w-5" />
           </button>
+        </div>
+      </div>
+
+      <div className="mx-auto hidden max-w-[90rem] xl:grid xl:grid-cols-[minmax(15rem,18rem)_minmax(0,1fr)_auto] xl:items-center xl:gap-4 xl:px-8 xl:py-4">
+        <Link href="/" className="min-w-0 pr-1" title={portfolio.fullName}>
+          <div className="min-w-0 leading-none">
+            <p className="truncate whitespace-nowrap font-display text-[0.88rem] font-semibold uppercase tracking-[0.04em] text-text 2xl:text-[0.94rem]">
+              {portfolio.fullName}
+            </p>
+            <p className="mt-2 text-[0.66rem] uppercase tracking-[0.32em] text-muted">Systems Portfolio</p>
+          </div>
+        </Link>
+
+        <div className="min-w-0">
+          <div className="nav-capsule soft-ring relative flex w-full items-center justify-center px-2 py-2">
+            <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
+            <nav className="flex items-center justify-center gap-0.5 whitespace-nowrap">
+              {navItems.map((item) => {
+                const isActive = activeHref === item.href;
+
+                return (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setActiveHref(item.href)}
+                    className={cn(
+                      "relative inline-flex items-center rounded-full px-2.5 py-2.5 text-[0.88rem] font-medium transition duration-300 2xl:px-3 2xl:text-[0.94rem]",
+                      isActive ? "text-text" : "text-muted hover:bg-accent/5 hover:text-text"
+                    )}
+                  >
+                    {isActive ? (
+                      <span className="absolute inset-0 rounded-full bg-accent/10 shadow-[0_10px_24px_rgba(56,189,248,0.12)] ring-1 ring-accent/20" />
+                    ) : null}
+                    <span className="relative">{item.label}</span>
+                  </a>
+                );
+              })}
+            </nav>
+          </div>
+        </div>
+
+        <div className="flex shrink-0 items-center justify-self-end gap-2.5">
+          <ThemeToggle className="min-w-[10.5rem]" />
+          <ResumeDownloadButton />
         </div>
       </div>
 
@@ -176,10 +163,9 @@ export function NavBar({ onAdminOpen }: NavBarProps) {
               setIsOpen(false);
               onAdminOpen();
             }}
-            className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-surface px-4 py-2.5 text-sm font-medium text-text"
+            className="rounded-full border border-border/80 bg-surface px-4 py-2.5 text-sm font-medium text-text"
           >
-            <ShieldEllipsis className="h-4 w-4" />
-            Admin
+            Open Admin
           </button>
           <ResumeDownloadButton className="w-full" />
         </div>
