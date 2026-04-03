@@ -8,12 +8,14 @@ import { cn } from "@/lib/utils";
 
 type ResumeDownloadButtonProps = {
   className?: string;
+  buttonClassName?: string;
   variant?: "primary" | "secondary";
   showStatus?: boolean;
 };
 
 export function ResumeDownloadButton({
   className,
+  buttonClassName,
   variant = "primary",
   showStatus = false
 }: ResumeDownloadButtonProps) {
@@ -68,7 +70,8 @@ export function ResumeDownloadButton({
           variant === "primary"
             ? "bg-text text-bg hover:-translate-y-0.5 hover:scale-[1.02] hover:opacity-95"
             : "border border-border/80 bg-surface/90 text-text backdrop-blur hover:-translate-y-0.5 hover:scale-[1.02] hover:border-accent/40 hover:shadow-card",
-          isLoading && "cursor-wait opacity-70"
+          isLoading && "cursor-wait opacity-70",
+          buttonClassName
         )}
       >
         <Download className="h-4 w-4" />

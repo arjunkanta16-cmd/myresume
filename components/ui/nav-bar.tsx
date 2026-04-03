@@ -68,7 +68,7 @@ export function NavBar({ onAdminOpen }: NavBarProps) {
     >
       <div className="mx-auto flex max-w-[88rem] items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8 xl:hidden">
         <Link href="/" className="min-w-0 flex-1" title={portfolio.fullName}>
-          <div className="min-w-0 leading-none">
+          <div className="nav-brand-lockup min-w-0 leading-none">
             <p className="truncate whitespace-nowrap font-display text-[0.92rem] font-semibold uppercase tracking-[0.05em] text-text sm:text-[0.98rem]">
               {mobileBrand}
             </p>
@@ -80,7 +80,7 @@ export function NavBar({ onAdminOpen }: NavBarProps) {
           <ThemeToggle compact />
           <button
             type="button"
-            className="soft-ring inline-flex h-11 w-11 items-center justify-center rounded-full border border-border/80 bg-surface/90 text-text"
+            className="nav-action-shell inline-flex h-11 w-11 items-center justify-center text-text transition duration-300 hover:-translate-y-0.5 hover:border-accent/35"
             onClick={() => setIsOpen((open) => !open)}
             aria-label="Open navigation"
           >
@@ -91,16 +91,16 @@ export function NavBar({ onAdminOpen }: NavBarProps) {
 
       <div className="mx-auto hidden max-w-[90rem] xl:grid xl:grid-cols-[minmax(15rem,18rem)_minmax(0,1fr)_auto] xl:items-center xl:gap-4 xl:px-8 xl:py-4">
         <Link href="/" className="min-w-0 pr-1" title={portfolio.fullName}>
-          <div className="min-w-0 leading-none">
-            <p className="truncate whitespace-nowrap font-display text-[0.88rem] font-semibold uppercase tracking-[0.04em] text-text 2xl:text-[0.94rem]">
+          <div className="nav-brand-lockup min-w-0 leading-none">
+            <p className="truncate whitespace-nowrap font-display text-[0.88rem] font-semibold uppercase tracking-[0.035em] text-text 2xl:text-[0.94rem]">
               {portfolio.fullName}
             </p>
-            <p className="mt-2 text-[0.66rem] uppercase tracking-[0.32em] text-muted">Systems Portfolio</p>
+            <p className="mt-2 text-[0.65rem] uppercase tracking-[0.34em] text-muted">Systems Portfolio</p>
           </div>
         </Link>
 
         <div className="min-w-0">
-          <div className="nav-capsule soft-ring relative flex w-full items-center justify-center px-2 py-2">
+          <div className="nav-capsule relative flex w-full items-center justify-center px-2 py-2">
             <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
             <nav className="flex items-center justify-center gap-0.5 whitespace-nowrap">
               {navItems.map((item) => {
@@ -112,13 +112,10 @@ export function NavBar({ onAdminOpen }: NavBarProps) {
                     href={item.href}
                     onClick={() => setActiveHref(item.href)}
                     className={cn(
-                      "relative inline-flex items-center rounded-full px-2.5 py-2.5 text-[0.88rem] font-medium transition duration-300 2xl:px-3 2xl:text-[0.94rem]",
-                      isActive ? "text-text" : "text-muted hover:bg-accent/5 hover:text-text"
+                      "nav-link-pill px-2.5 py-2.5 text-[0.88rem] 2xl:px-3 2xl:text-[0.94rem]",
+                      isActive && "nav-link-pill-active"
                     )}
                   >
-                    {isActive ? (
-                      <span className="absolute inset-0 rounded-full bg-accent/10 shadow-[0_10px_24px_rgba(56,189,248,0.12)] ring-1 ring-accent/20" />
-                    ) : null}
                     <span className="relative">{item.label}</span>
                   </a>
                 );
@@ -128,8 +125,8 @@ export function NavBar({ onAdminOpen }: NavBarProps) {
         </div>
 
         <div className="flex shrink-0 items-center justify-self-end gap-2.5">
-          <ThemeToggle className="min-w-[10.5rem]" />
-          <ResumeDownloadButton />
+          <ThemeToggle className="min-w-[10.25rem]" />
+          <ResumeDownloadButton buttonClassName="nav-action-shell min-h-[2.875rem] px-5 py-3 text-[0.92rem] shadow-none hover:border-accent/35" />
         </div>
       </div>
 
