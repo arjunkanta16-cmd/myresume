@@ -17,35 +17,33 @@ export function HeroSection() {
         <div className="ambient-blob ambient-blob-blue left-[-8rem] top-14 h-72 w-72" />
         <div className="ambient-blob ambient-blob-warm right-[-5rem] top-24 h-60 w-60 [animation-delay:-4s]" />
       </div>
-      <div className="mx-auto grid max-w-7xl gap-14 px-4 pb-24 pt-10 sm:px-6 lg:grid-cols-[1.02fr_0.98fr] lg:px-8 lg:pb-28 lg:pt-12">
-        <motion.div className="relative">
+      <div className="mx-auto grid max-w-[88rem] gap-12 px-4 pb-24 pt-12 sm:px-6 lg:grid-cols-[minmax(0,1.08fr)_minmax(31rem,0.92fr)] lg:items-start lg:gap-14 lg:px-8 lg:pb-28 lg:pt-16">
+        <motion.div className="relative max-w-[46rem] pt-2">
           <motion.div variants={fadeUpItem} className="section-label">
             Thoughtful systems. Calm execution. Real-world impact.
           </motion.div>
 
           <motion.p
             variants={fadeUpItem}
-            className="mt-8 text-sm font-medium uppercase tracking-[0.28em] text-muted"
+            className="mt-8 max-w-[32rem] text-sm font-medium uppercase tracking-[0.24em] text-muted"
           >
             {portfolio.role}
           </motion.p>
 
           <motion.h1
             variants={fadeUpItem}
-            className="mt-5 max-w-[52rem] font-display text-[clamp(2.9rem,5.6vw,4.9rem)] font-semibold leading-[0.95] tracking-[-0.05em] text-text"
+            className="mt-6 max-w-[43rem] font-display text-[clamp(2.9rem,5vw,4.6rem)] font-semibold leading-[0.93] tracking-[-0.052em] text-text"
           >
             I build
             {" "}
             <span className="text-gradient">meaningful systems</span>
-            <br />
-            with engineering depth
-            <br />
-            and calm product thinking.
+            <span className="block">with engineering depth</span>
+            <span className="block">and calm product thinking.</span>
           </motion.h1>
 
           <motion.p
             variants={fadeUpItem}
-            className="mt-6 max-w-3xl text-[1.02rem] leading-8 text-muted sm:text-[1.1rem] sm:leading-8"
+            className="mt-7 max-w-[41rem] text-[1rem] leading-8 text-muted sm:text-[1.08rem]"
           >
             <span className="highlight-word">{portfolio.fullName}</span>
             {" "}
@@ -54,17 +52,17 @@ export function HeroSection() {
 
           <motion.p
             variants={fadeUpItem}
-            className="text-gradient mt-6 max-w-3xl font-display text-[clamp(1.35rem,2.2vw,2rem)] font-semibold leading-[1.08]"
+            className="text-gradient mt-7 max-w-[37rem] font-display text-[clamp(1.28rem,2.05vw,1.78rem)] font-semibold leading-[1.08]"
           >
             {portfolio.tagline}
           </motion.p>
 
-          <motion.div variants={staggerContainer} className="mt-8 max-w-3xl space-y-4 text-base leading-8 text-muted sm:text-[1.02rem]">
+          <motion.div variants={staggerContainer} className="mt-8 max-w-[39rem] space-y-4 text-base leading-8 text-muted sm:text-[1.01rem]">
             <motion.p variants={fadeUpItem}>{portfolio.shortIntro}</motion.p>
             <motion.p variants={fadeUpItem}>{portfolio.heroBlurb}</motion.p>
           </motion.div>
 
-          <motion.div variants={staggerContainer} className="mt-10 flex flex-col gap-4 sm:flex-row">
+          <motion.div variants={staggerContainer} className="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
             <motion.a
               variants={softScaleIn}
               href="#projects"
@@ -91,19 +89,19 @@ export function HeroSection() {
           </motion.div>
         </motion.div>
 
-        <motion.div className="relative hero-float lg:pt-4">
+        <motion.div className="relative hero-float lg:pt-2" data-hero-panel>
           <div className="hero-orb absolute -left-8 top-12 h-40 w-40 rounded-full bg-accent/10 blur-3xl" />
           <div className="hero-orb-delay absolute -right-6 bottom-8 h-44 w-44 rounded-full bg-[#f5d7aa]/50 blur-3xl" />
 
-          <div className="premium-panel relative overflow-hidden p-5 sm:p-7">
+          <div className="premium-panel relative mx-auto max-w-[40.5rem] overflow-hidden p-5 sm:p-7">
             <div className="absolute inset-x-7 top-0 h-px bg-gradient-to-r from-transparent via-accent/35 to-transparent" />
             <div className="premium-subpanel relative overflow-hidden p-6 sm:p-7">
               <div className="absolute inset-0 bg-gradient-to-br from-accent/6 via-surface/50 to-[#fde8cf]/50" />
               <div className="absolute -right-12 top-0 h-40 w-40 rounded-full bg-accent/10 blur-3xl" />
 
               <motion.div className="relative">
-                <div className="flex items-start justify-between gap-4">
-                  <div>
+                <div className="flex items-start justify-between gap-5">
+                  <div className="max-w-[24rem]">
                     <motion.div
                       variants={fadeUpItem}
                       className="inline-flex items-center gap-2 rounded-full border border-accent/15 bg-accent-soft px-3 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.28em] text-accent"
@@ -116,7 +114,7 @@ export function HeroSection() {
                     </motion.p>
                     <motion.h2
                       variants={fadeUpItem}
-                      className="mt-3 max-w-md font-display text-[clamp(2rem,4vw,3.2rem)] font-semibold leading-[0.96] text-text"
+                      className="mt-3 max-w-[20rem] font-display text-[clamp(1.92rem,3.2vw,3rem)] font-semibold leading-[0.96] text-text"
                     >
                       Serious engineering, expressed with clarity
                     </motion.h2>
@@ -129,7 +127,7 @@ export function HeroSection() {
                   </motion.div>
                 </div>
 
-                <motion.p variants={fadeUpItem} className="mt-6 text-base leading-8 text-muted">
+                <motion.p variants={fadeUpItem} className="mt-6 max-w-[28rem] text-base leading-8 text-muted">
                   {portfolio.professionalIdentity}
                 </motion.p>
 
