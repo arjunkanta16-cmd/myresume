@@ -9,7 +9,8 @@ type AnimatedSectionProps = PropsWithChildren<{
 
 export function AnimatedSection({ children, className, id }: AnimatedSectionProps) {
   return (
-    <section id={id} className={["scroll-mt-32 sm:scroll-mt-36", className].filter(Boolean).join(" ")}>
+    <section className={["relative", className].filter(Boolean).join(" ")}>
+      {id ? <span id={id} aria-hidden="true" className="pointer-events-none absolute -top-24 sm:-top-28" /> : null}
       {children}
     </section>
   );
